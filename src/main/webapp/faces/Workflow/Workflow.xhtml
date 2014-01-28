@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:shiro="http://shiro.apache.org/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form id="workflowForm">
+		<p:layout style="min-width:400px;min-height:800px;" id="layout">
+			<p:layoutUnit position="west" header="Right" resizable="true"
+				size="220" closable="true" collapsible="true" effect="drop">
+				<p:menu style="width:200px">
+					<p:submenu label="Filenet Workflow">
+						<p:menuitem value="QueryWorkItemsInRoster"
+							actionListener="#{workflowBean.queryWorkItemsInRoster()}"
+							update="workflowForm" />
+						<p:menuitem value="QueryWorkItemsInMyInbox"
+							actionListener="#{workflowBean.queryWorkItemsInMyInbox()}"
+							update="workflowForm" />
+						<p:menuitem value="QueryDocManagerWorkItems"
+							actionListener="#{workflowBean.queryDocManagerWorkItems()}"
+							update="workflowForm" />
+						<p:menuitem value="SearchHistoryByFilter"
+							actionListener="#{workflowBean.searchHistoryByFilter()}"
+							update="workflowForm" />
+					</p:submenu>
+				</p:menu>
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<div class="style1">
+					<h:panelGrid id="searchForm" columns="6"
+						columnClasses="column1,column2,column1,column2,column1,column2">
+						<h:outputText value="F_Subject:" />
+						<p:inputText value="#{workflowBean.filter['F_Subject']}" />
+						<h:outputText value="F_WobNum:" />
+						<p:inputText value="#{workflowBean.filter['F_WobNum']}" />
+					</h:panelGrid>
+				</div>
+				<p:dataTable value="#{workflowBean.workItems}" var="workItem"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						<h:outputText value="Workflow Details" />
+					</f:facet>
+					<p:column headerText="Workflow Name">
+						<h:outputText value="#{workItem.workflowName}" />
+					</p:column>
+					<p:column headerText="WorkObject Number">
+						<h:outputText value="#{workItem.workObjectNumber}" />
+					</p:column>
+					<p:column headerText="Workflow Number">
+						<h:outputText value="#{workItem.workflowNumber}" />
+					</p:column>
+					<p:column headerText="Subject">
+						<h:outputText value="#{workItem.subject}" />
+					</p:column>
+					<p:column headerText="Queue Name">
+						<h:outputText value="#{workItem.queueName}" />
+					</p:column>
+					<p:column headerText="Step Name">
+						<h:outputText value="#{workItem.stepName}" />
+					</p:column>
+					<p:column headerText="Oprate">
+						<p:commandButton lable="detail" icon="ui-icon-zoomout" actionListener="#{workflowBean.getWorkItemDetail(workItem.workObjectNumber)}" update=":workflowDetailsForm" oncomplete="workflowDetailsDialogVar.show();" />
+					</p:column>
+				</p:dataTable>
+				<p:dataTable value="#{workflowBean.dealedHistoryVos}" var="history"
+				paginator="true" rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+				<f:facet name="header">
+					<h:outputText value="My Dealed Workflow" />
+				</f:facet>
+				<p:column headerText="Workflow Name">
+					<h:outputText value="#{history.workflowName}" />
+				</p:column>
+				<p:column headerText="WorkFlow Number">
+					<h:outputText value="#{history.f_WorkFlowNumber}" />
+				</p:column>
+				<p:column headerText="Subject">
+					<h:outputText value="#{history.subject}" />
+				</p:column>
+				<p:column headerText="Queue Name">
+					<h:outputText value="#{history.queueName}" />
+				</p:column>
+				<p:column headerText="Step Name">
+					<h:outputText value="#{history.stepName}" />
+				</p:column>
+				<p:column headerText="User Name">
+					<h:outputText value="#{history.userName}" />
+				</p:column>
+				<p:column headerText="Time">
+					<h:outputText value="#{history.f_TimeStamp}" />
+				</p:column>
+				<p:column headerText="Oprate">
+						<p:commandButton lable="detail" icon="ui-icon-zoomout" actionListener="#{workflowBean.getWorkItemDetail(history.f_WorkFlowNumber)}" update=":workflowDetailsForm" oncomplete="workflowDetailsDialogVar.show();" />
+					</p:column>
+			</p:dataTable>
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</ui:composition>

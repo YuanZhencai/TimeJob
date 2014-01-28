@@ -1,0 +1,536 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>TimeJob</groupId>
+	<artifactId>TimeJob</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>TimeJob Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>wcs-central</id>
+			<name>WCS Central Repository</name>
+			<url>http://10.229.14.10:8080/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<profiles>
+		<profile>
+			<id>glassfish</id>
+			<!-- <activation> <activeByDefault>true</activeByDefault> </activation> -->
+			<properties>
+				<!-- JPA Datasource -->
+				<db.jndi>jdbc/tih</db.jndi>
+				<!-- CAS -->
+				<cas.server.url>http://10.228.191.203:9084/castest</cas.server.url>
+				<cas.client.url>http://10.228.190.163:8080</cas.client.url>
+				<app.url>http://10.228.190.163:8080/tih</app.url>
+				<!-- Filenet -->
+				<ce.uri>http\://10.228.191.202\:9080/wsi/FNCEWS40DIME/</ce.uri>
+				<ce.os>TIHObj</ce.os>
+				<pe.uri>http\://10.228.191.202\:9080/wsi/FNCEWS40MTOM/</pe.uri>
+				<pe.cp>tih_cp</pe.cp>
+				<admin.id>fnadmin</admin.id>
+				<admin.password>fnadmin123</admin.password>
+				<user.password>tihfilenet</user.password>
+				<fn.version>5.0</fn.version>
+				<!-- MDS -->
+				<mds.basepath>http://10.228.191.203:9085/rs</mds.basepath>
+				<!-- UNS -->
+				<mdsurl>http\://10.228.191.203\:9085/rs/sys/tih</mdsurl>
+				<uns_servergeturl>http\://10.229.12.153\:9086/rs/msg/rejected/tih?</uns_servergeturl>
+				<!-- TDS -->
+				<tds.url>ldap\://10.228.191.201\:389</tds.url>
+				<tds.search.dn>cn\=root</tds.search.dn>
+				<tds.psw>password</tds.psw>
+				<app.prefix.testapp />
+				<!--WAS -->
+				<app.context-root>/TimeJob</app.context-root>
+			</properties>
+		</profile>
+		<profile>
+			<id>arquillian-glassfish-remote</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- JPA Datasource -->
+				<db.jndi>jdbc/tih</db.jndi>
+				<!-- CAS -->
+				<cas.server.url>http://10.228.191.203:9084/castest</cas.server.url>
+				<cas.client.url>http://10.228.190.163:8080</cas.client.url>
+				<app.url>http://10.228.190.163:8080/tih</app.url>
+				<!-- Filenet -->
+				<ce.uri>http\://10.228.191.202\:9080/wsi/FNCEWS40DIME/</ce.uri>
+				<ce.os>TIHObj</ce.os>
+				<pe.uri>http\://10.228.191.202\:9080/wsi/FNCEWS40MTOM/</pe.uri>
+				<pe.cp>tih_cp</pe.cp>
+				<admin.id>fnadmin</admin.id>
+				<admin.password>fnadmin123</admin.password>
+				<user.password>tihfilenet</user.password>
+				<fn.version>5.0</fn.version>
+				<!-- MDS -->
+				<mds.basepath>http://10.228.191.203:9085/rs</mds.basepath>
+				<!-- UNS -->
+				<mdsurl>http\://10.228.191.203\:9085/rs/sys/tih</mdsurl>
+				<uns_servergeturl>http\://10.229.12.153\:9086/rs/msg/rejected/tih?</uns_servergeturl>
+				<!-- TDS -->
+				<tds.url>ldap\://10.228.191.201\:389</tds.url>
+				<tds.search.dn>cn\=root</tds.search.dn>
+				<tds.psw>password</tds.psw>
+				<app.prefix.testapp />
+				<!--WAS -->
+				<app.context-root>/TimeJob</app.context-root>
+			</properties>
+			<dependencies>
+				<!-- javaee -->
+				<dependency>
+					<groupId>org.jboss.spec</groupId>
+					<artifactId>jboss-javaee-6.0</artifactId>
+					<version>1.0.0.Final</version>
+					<type>pom</type>
+					<scope>provided</scope>
+				</dependency>
+				<!-- Arquillian JUnit -->
+				<dependency>
+					<groupId>org.jboss.arquillian.junit</groupId>
+					<artifactId>arquillian-junit-container</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+					<scope>test</scope>
+					<version>4.8.1</version>
+				</dependency>
+				<!-- glassfish-remote -->
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-glassfish-remote-3.1</artifactId>
+					<version>1.0.0.CR3</version>
+					<scope>test</scope>
+				</dependency>
+				<!-- persistence-impl -->
+				<dependency>
+					<groupId>org.jboss.arquillian.extension</groupId>
+					<artifactId>arquillian-persistence-impl</artifactId>
+					<version>1.0.0.Alpha6</version>
+					<scope>test</scope>
+					<exclusions>
+						<exclusion>
+							<artifactId>slf4j-api</artifactId>
+							<groupId>org.slf4j</groupId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<!-- shrinkwrap-resolver -->
+				<dependency>
+					<groupId>org.jboss.shrinkwrap.resolver</groupId>
+					<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+					<scope>test</scope>
+				</dependency>
+
+
+				<dependency>
+					<groupId>org.jboss.arquillian.extension</groupId>
+					<artifactId>arquillian-drone-impl</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.arquillian.extension</groupId>
+					<artifactId>arquillian-drone-selenium</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.arquillian.extension</groupId>
+					<artifactId>arquillian-drone-selenium-server</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.arquillian.extension</groupId>
+					<artifactId>arquillian-drone-webdriver</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-remote-driver</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-server</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.arquillian.protocol</groupId>
+					<artifactId>arquillian-protocol-servlet</artifactId>
+				</dependency>
+				<!-- Selenium dependencies -->
+				<dependency>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-support</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<!-- driver -->
+				<dependency>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-chrome-driver</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+
+				<testResources>
+					<testResource>
+						<directory>src/test/resources</directory>
+					</testResource>
+					<testResource>
+						<directory>src/test/resources-glassfish-remote</directory>
+					</testResource>
+				</testResources>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>yumpoc</id>
+			<!-- <activation> <activeByDefault>true</activeByDefault> </activation> -->
+			<properties>
+				<!-- JPA Datasource -->
+				<db.jndi>YUM_POC</db.jndi>
+				<!-- CAS -->
+				<cas.server.url>http://10.228.191.203:9084/castest</cas.server.url>
+				<cas.client.url>http://10.228.191.238:9080</cas.client.url>
+				<app.url>http://10.228.191.238:9080/yum</app.url>
+				<!-- Filenet -->
+				<pe.uri>http\://10.228.191.233\:9080/wsi/FNCEWS40DIME/</pe.uri>
+				<ce.os>OAQOBJ</ce.os>
+				<ce.uri>http\://10.228.191.233\:9080/wsi/FNCEWS40MTOM/</ce.uri>
+				<pe.cp>OAQ_CP</pe.cp>
+				<admin.id>fnadmin</admin.id>
+				<admin.password>fnadmin123</admin.password>
+				<user.password>yumfilenet</user.password>
+				<fn.version>5.1</fn.version>
+				<!-- MDS -->
+				<mds.basepath>http://10.228.191.203:9085/rs</mds.basepath>
+				<!-- UNS -->
+				<mdsurl>http\://10.228.191.203\:9085/rs/sys/tih</mdsurl>
+				<uns_servergeturl>http\://10.229.12.153\:9086/rs/msg/rejected/tih?</uns_servergeturl>
+				<!-- TDS -->
+				<tds.url>ldap\://10.228.191.241\:389</tds.url>
+				<tds.search.dn>cn\=root</tds.search.dn>
+				<tds.psw>password</tds.psw>
+				<app.prefix.testapp>yum</app.prefix.testapp>
+			</properties>
+			<modules>
+			</modules>
+		</profile>
+	</profiles>
+	<dependencyManagement>
+		<!-- arquillian API -->
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.0.0.Final</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-bom</artifactId>
+				<version>1.0.0.Final</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- must before javaee-web-api -->
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>filenet</artifactId>
+			<version>${fn.version}</version>
+			<classifier>pe3pt</classifier>
+		</dependency>
+		<!-- FileNet -->
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>filenet</artifactId>
+			<version>${fn.version}</version>
+			<classifier>jace</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>filenet</artifactId>
+			<version>${fn.version}</version>
+			<classifier>pe</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>filenet</artifactId>
+			<version>${fn.version}</version>
+			<classifier>stax-api</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>filenet</artifactId>
+			<version>${fn.version}</version>
+			<classifier>xlxpScanner</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>filenet</artifactId>
+			<version>${fn.version}</version>
+			<classifier>xlxpScannerUtils</classifier>
+		</dependency>
+		<!-- J2EE -->
+		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-api</artifactId> 
+			<version>6.0</version> <scope>provided</scope> </dependency> -->
+		<!-- OpenJPA -->
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa-all</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<!-- log -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.1</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.1</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- Myfaces -->
+
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<!-- rome -->
+		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- Jasper Report -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>4.7.0</version>
+		</dependency>
+		<!-- groovy -->
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+
+		<!-- db2 -->
+		<dependency>
+			<groupId>db2jcc</groupId>
+			<artifactId>db2jcc</artifactId>
+			<version>9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>db2jcc_license_cu</groupId>
+			<artifactId>db2jcc_license_cu</artifactId>
+			<version>9.0</version>
+		</dependency>
+		<!-- jdbc -->
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- utils -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-betwixt</groupId>
+			<artifactId>commons-betwixt</artifactId>
+			<version>1.0-alpha-1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r09</version>
+		</dependency>
+
+		<dependency>
+			<groupId>rapid</groupId>
+			<artifactId>xsqlbuilder</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<!-- postgresql -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901.jdbc4</version>
+		</dependency>
+
+		<!-- akka -->
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor_2.10</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<!-- mongodb -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<!-- activemq -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.4.3</version>
+		</dependency>
+		<!-- activemq-ra -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-ra</artifactId>
+			<version>5.4.3</version>
+		</dependency>
+		<!-- email -->
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!-- gf-client -->
+		<!--<dependency> <groupId>org.glassfish.main.appclient.client</groupId> 
+			<artifactId>gf-client</artifactId> <version>3.1.1</version> <scope>system</scope> 
+			<systemPath>D:/development/glassfish-3.1.1/glassfish3/glassfish/lib/gf-client.jar</systemPath> 
+			</dependency> -->
+		<!-- appserv-rt -->
+		<!-- <dependency> <groupId>org.glassfish.main.appclient.client</groupId> 
+			<artifactId>appserv-rt</artifactId> <version>3.1.1</version> <scope>system</scope> 
+			<systemPath>D:/development/glassfish-3.1.1/glassfish3/glassfish/lib/appserv-rt.jar</systemPath> 
+			</dependency> -->
+		<!-- javaee -->
+		<!-- <dependency> <groupId>org.glassfish.main.appclient.client</groupId> 
+			<artifactId>javaee</artifactId> <version>3.1.1</version> <scope>system</scope> 
+			<systemPath>D:/development/glassfish-3.1.1/glassfish3/glassfish/lib/javaee.jar</systemPath> 
+			</dependency> -->
+		<!-- jco -->
+		<dependency>
+			<groupId>com.sap</groupId>
+			<artifactId>sapjco3</artifactId>
+			<version>3.0.2-linuxx86_64</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>TimeJob</finalName>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+
+	</build>
+</project>

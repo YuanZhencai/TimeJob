@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="TimeJob" transaction-type="JTA">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<jta-data-source>jdbc/ytih</jta-data-source>
+		<properties>
+			<!-- <property name="openjpa.ConnectionDriverName" value="com.ibm.db2.jcc.DB2Driver" />
+			<property name="openjpa.ConnectionProperties" value="username=Yuan, password=19900115" />
+			<property name="openjpa.ConnectionURL" value="jdbc:db2://localhost:50000/Y_TIH" /> -->
+			<!-- <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/> -->
+			<property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO" />
+			<!-- Ensures the DB schema is kept in sync with the JPA entity classes as they are developed -->
+			<property name="openjpa.DynamicEnhancementAgent" value="false" />
+			<!-- <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema" /> -->
+			<!-- <property name="openjpa.jdbc.DBDictionary" value="useWildCardForCount=true" /> -->	<!-- support count(*) -->
+			<property name="openjpa.jdbc.UpdateManager" value="operation-order" />
+			<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)" />
+			<property name="openjpa.Multithreaded" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

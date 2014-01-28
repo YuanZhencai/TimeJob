@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<p:dialog header="流程详细" widgetVar="workflowDetailsDialogVar"
+		id="workflowDetailsDialog" resizable="false" modal="true">
+		<h:form id="workflowDetailsForm" prependId="false">
+			<p:dataTable value="#{workflowBean.histories}" var="history"
+				paginator="true" rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+				<f:facet name="header">
+					<h:outputText value="Workflow Details" />
+				</f:facet>
+				<p:column headerText="Workflow Name">
+					<h:outputText value="#{history.workflowName}" />
+				</p:column>
+				<p:column headerText="WorkFlow Number">
+					<h:outputText value="#{history.f_WorkFlowNumber}" />
+				</p:column>
+				<p:column headerText="Subject">
+					<h:outputText value="#{history.subject}" />
+				</p:column>
+				<p:column headerText="Queue Name">
+					<h:outputText value="#{history.queueName}" />
+				</p:column>
+				<p:column headerText="Step Name">
+					<h:outputText value="#{history.stepName}" />
+				</p:column>
+				<p:column headerText="User Name">
+					<h:outputText value="#{history.userName}" />
+				</p:column>
+				<p:column headerText="Time">
+					<h:outputText value="#{history.f_TimeStamp}" />
+				</p:column>
+				
+				
+			</p:dataTable>
+		</h:form>
+	</p:dialog>
+</ui:composition>

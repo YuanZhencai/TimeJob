@@ -1,0 +1,18 @@
+#client properties
+client=cmdpms
+jco.client.ashost=10.11.0.124
+jco.client.client=888
+jco.client.user=cmdpms
+jco.client.passwd=sap123-
+jco.client.lang=zh
+jco.client.sysnr=00
+jco.destination.pool_capacity=30
+jco.destination.peak_limit=49
+
+#server properties
+server=cmdpms_ncp
+jco.server.gwhost=10.11.0.124
+jco.server.gwserv=sapgw00
+jco.server.progid=cmdpms_pro_id
+jco.server.repository_destination=cmdpms
+jco.server.connection_count=49

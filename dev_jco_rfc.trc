@@ -1,0 +1,25 @@
+
+**** Error file opened at 20131118 152616 China Standard Time Rel 3.0.2 (2009-03-29) [720.63]
+Error:  >Mon Nov 18 15:26:16,728<    
+RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=cmdpms ASHOST=CN-SAPDEV.WILMAR-INTERNATIONAL.COM SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner 'CN-SAPDEV.WILMAR-INTERNATIONAL.COM:3300' not reached
+TIME        Mon Nov 18 15:26:16 2013
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3271
+DETAIL      NiPConnect2: 10.11.0.21:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION

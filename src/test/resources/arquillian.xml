@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://jboss.org/schema/arquillian"
+	xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+	<!-- Uncomment to have test archives exported to the file system for inspection -->
+	<!-- <engine> <property name="deploymentExportPath">target/</property> </engine> -->
+
+	<container qualifier="glassfish" default="true">
+		<configuration>
+			<property name="remoteServerAddress">localhost</property>
+			<property name="remoteServerHttpPort">8080</property>
+			<property name="remoteServerAdminPort">4848</property>
+			<!-- <property name="resourcesXml"> src/test/resources-glassfish-remote/glassfish-resources.xml 
+				</property> -->
+		</configuration>
+	</container>
+
+	<extension qualifier="webdriver">
+		<!-- ChromeDriver only -->
+		<property name="browser">chrome</property>
+		<property name="chromeDriverBinary">D:/chromedriver_win32/chromedriver.exe</property>
+		<property name="dimensions">1300x500</property>
+	</extension>
+	
+	<extension qualifier="selenium-server">
+		<property name="enable">true</property>
+	</extension>
+	
+	<container qualifier="glassfish-auth">
+		<configuration>
+			<property name="remoteServerAddress">localhost</property>
+			<property name="remoteServerHttpPort">8080</property>
+			<property name="remoteServerAdminPort">4848</property>
+			<property name="remoteServerAdminUser">admin</property>
+			<property name="remoteServerAdminPassword">admin</property>
+		</configuration>
+	</container>
+
+</arquillian>

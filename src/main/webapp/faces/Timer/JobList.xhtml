@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:shiro="http://shiro.apache.org/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:define name="styleAndScript">
+		<style type="text/css">
+</style>
+		<script type="text/javascript">  
+        </script>
+	</ui:define>
+	<ui:define name="content">
+		<p:panel styleClass="panel1">
+			<h2>Job List</h2>
+			<h:form>
+				<p:dataTable value="#{JobList.jobs}" var="item" paginator="true"
+					rows="10" id="jobList">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Job ID" />
+						</f:facet>
+						<h:commandLink action="#{JobMBean.setSelectedJob(item)}"
+							value="#{item.jobId}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Name" />
+						</f:facet>
+						<h:outputText value="#{item.jobName}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="JNDI of Session Bean" />
+						</f:facet>
+						<h:outputText value="#{item.jobClassName}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Start Date" />
+						</f:facet>
+						<h:outputText value="#{item.startDateStr}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="End Date" />
+						</f:facet>
+						<h:outputText value="#{item.endDateStr}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Next Timeout" />
+						</f:facet>
+						<h:outputText value="#{item.nextTimeoutStr}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Expression" />
+						</f:facet>
+						<h:outputText value="#{item.expression}" />
+					</p:column>
+				</p:dataTable>
+				<br />
+				<p:commandButton action="#{JobMBean.gotoNew}" value="New Job" ajax="false"/>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

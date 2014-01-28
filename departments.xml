@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DepartmentList>
+	<list>
+		<Department>
+			<name>行政部</name>
+			<personList>
+				<person>
+					<age>35</age>
+					<gender>男</gender>
+					<name>张三</name>
+				</person>
+			</personList>
+		</Department>
+		<Department>
+			<name>技术部</name>
+			<personList>
+				<person>
+					<age>30</age>
+					<gender>男</gender>
+					<name>李四</name>
+				</person>
+				<person>
+					<age>28</age>
+					<gender>女</gender>
+					<name>王五</name>
+				</person>
+			</personList>
+		</Department>
+	</list>
+</DepartmentList>

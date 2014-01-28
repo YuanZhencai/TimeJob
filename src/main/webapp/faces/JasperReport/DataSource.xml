@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NameList>
+	<Person>
+		<Name>强尼</Name>
+		<Gender>男</Gender>
+		<Age>56</Age>
+	</Person>
+	<Person>
+		<Name>阿美</Name>
+		<Gender>女</Gender>
+		<Age>23</Age>
+	</Person>
+	<Person>
+		<Name>李丽</Name>
+		<Gender>女</Gender>
+		<Age>58</Age>
+	</Person>
+	<Person>
+		<Name>杰森</Name>
+		<Gender>男</Gender>
+		<Age>32</Age>
+	</Person>
+	<Person>
+		<Name>刘三</Name>
+		<Gender>男</Gender>
+		<Age>21</Age>
+	</Person>
+</NameList>

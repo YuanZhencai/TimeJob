@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:shiro="http://shiro.apache.org/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form id="reportForm">
+		<p:layout style="min-width:400px;min-height:800px;" id="layout">
+			<p:layoutUnit position="west" header="Right" resizable="true" size="220" 
+				closable="true" collapsible="true" effect="drop">
+				<p:menu style="width:200px">
+					<p:submenu label="Jasper Report">
+						<p:menuitem value="Person Report"
+							actionListener="#{reportBean.searchPersonReport()}"
+							update="reportForm" />
+						<p:menuitem value="Workflow Details Report"
+							actionListener="#{reportBean.searchWfDetailsReport()}"
+							update="reportForm" />
+						<p:menuitem value="JavaBean Datasource Report"
+							actionListener="#{reportBean.searchJavaBeanReport()}"
+							update="reportForm" />
+						<p:menuitem value="Deportment Report"
+							actionListener="#{reportBean.searchDepartmentReport()}"
+							update="reportForm" />
+					</p:submenu>
+				</p:menu>
+				<p:commandButton value="Export Report" action="#{reportBean.exportReport()}" ajax="false" />
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<h:panelGroup>
+					<h:outputText escape="false" value="#{reportBean.reportContent}" />
+				</h:panelGroup>
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</ui:composition>

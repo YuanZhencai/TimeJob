@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NameList>
+  <Person>
+    <age>35</age>
+    <gender>男</gender>
+    <name>张三</name>
+  </Person>
+  <Person>
+    <age>20</age>
+    <gender>男</gender>
+    <name>李四</name>
+  </Person>
+  <Person>
+    <age>25</age>
+    <gender>男</gender>
+    <name>王五</name>
+  </Person>
+
+</NameList>
