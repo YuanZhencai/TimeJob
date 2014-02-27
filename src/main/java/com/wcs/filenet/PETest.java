@@ -419,5 +419,33 @@ public class PETest {
             e.printStackTrace();
         }
     }
+    
+    public static void main(String[] args) {
+    	VWSession vwSession = SessionHelper.logon("linlin", "tihfilenet");
+    	try {
+    		VWRoster roster = vwSession.getRoster("DefaultRoster");
+            int queryFlags = 0;
+            String filter = "F_WobNum = :WobNum";
+            VWWorkObjectNumber vwWobNum = new VWWorkObjectNumber("01CBD9F404672541A0899C57B2A314B2");
+            Object[] substitutionVars = { vwWobNum };
+            roster.setBufferSize(1);
+            VWRosterQuery rQuery = roster.createQuery(null, null, null, queryFlags, filter, substitutionVars, VWFetchType.FETCH_TYPE_WORKOBJECT);
+            System.out.println("[fetchCount]" + rQuery.fetchCount());
+            if (rQuery.hasNext()) {
+            	VWWorkObject re = (VWWorkObject) rQuery.next();
+            	VWStepElement st = re.fetchStepElement();
+            	System.out.println("[getStepName]"+st.getStepName());
+            }
+		} catch (VWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	try {
+    		vwSession.logoff();
+        } catch (VWException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+	}
 
 }
